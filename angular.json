@@ -27,7 +27,12 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/static/js/components/dark.js",
+              "src/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js",
+              "src/assets/compiled/js/app.js",
+              "src/assets/extensions/simple-datatables/umd/simple-datatables.js"
+            ]
           },
           "configurations": {
             "production": {
