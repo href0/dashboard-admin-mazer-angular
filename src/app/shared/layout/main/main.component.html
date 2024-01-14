@@ -18,8 +18,13 @@
           <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">DataTable</li>
+                @for ( bread of breadCrumb ; track bread; let idx = $index) {
+                  @if (idx === breadCrumb.length - 1) {
+                    <li class="breadcrumb-item active" aria-current="page">{{ bread.charAt(0).toUpperCase() + bread.slice(1) }}</li>
+                  } @else {
+                    <li style="cursor: pointer;color:  rgba(var(--bs-link-color-rgb),var(--bs-link-opacity, 1));" class="breadcrumb-item active" aria-current="page" routerLink="{{ bread ? parent + '/' + bread.toLowerCase() : '' }}">{{ bread.charAt(0).toUpperCase() + bread.slice(1) }}</li>
+                  }
+                }
               </ol>
             </nav>
           </div>

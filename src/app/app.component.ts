@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { APP_INITIALIZER, Component } from '@angular/core';
 import { CommonModule, IMAGE_CONFIG } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 

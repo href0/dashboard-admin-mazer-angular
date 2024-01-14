@@ -7,8 +7,8 @@
         </div>
         <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
-            role="img" class="iconify iconify--system-uicons" width="20" height="20"
-            preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
+            role="img" class="iconify iconify--system-uicons" width="20" height="20" preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 21 21">
             <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
               <path
                 d="M10.5 14.5c2.219 0 4-1.763 4-3.982a4.003 4.003 0 0 0-4-4.018c-2.219 0-4 1.781-4 4c0 2.219 1.781 4 4 4zM4.136 4.136L5.55 5.55m9.9 9.9l1.414 1.414M1.5 10.5h2m14 0h2M4.135 16.863L5.55 15.45m9.899-9.9l1.414-1.415M10.5 19.5v-2m0-14v-2"
@@ -39,122 +39,36 @@
     </div>
     <div class="sidebar-menu">
       <ul class="menu">
-        <li class="sidebar-title">Menu</li>
+        @for ( parent of sidebars; track parent.id; let parentIndex = $index) {
+          <li class="sidebar-title"> {{ parent.name }}</li>
 
-        <li class="sidebar-item" routerLinkActive="active">
-          <a routerLink="/product" class='sidebar-link'>
-            <i class="bi bi-grid-fill"></i>
-            <span>Dashboard</span>
-          </a>
-        </li>
-
-        <li class="sidebar-item" routerLinkActive="active">
-          <a routerLink="/test"  class='sidebar-link'>
-            <i class="bi bi-person-fill-gear"></i>
-            <span>Test</span>
-          </a>
-        </li>
-
-        <li class="sidebar-item  has-sub">
-          <a href="#" class='sidebar-link'>
-            <i class="bi bi-stack"></i>
-            <span>Components</span>
-          </a>
-
-          <ul class="submenu ">
-
-            <li class="submenu-item  ">
-              <a href="component-accordion.html" class="submenu-link">Accordion</a>
-
-            </li>
-
-            <li class="submenu-item  ">
-              <a href="component-alert.html" class="submenu-link">Alert</a>
-
-            </li>
-
-            <li class="submenu-item  ">
-              <a href="component-badge.html" class="submenu-link">Badge</a>
-
-            </li>
-
-            <li class="submenu-item  ">
-              <a href="component-breadcrumb.html" class="submenu-link">Breadcrumb</a>
-
-            </li>
-
-            <li class="submenu-item  ">
-              <a href="component-button.html" class="submenu-link">Button</a>
-
-            </li>
-
-            <li class="submenu-item  ">
-              <a href="component-card.html" class="submenu-link">Card</a>
-
-            </li>
-
-            <li class="submenu-item  ">
-              <a href="component-carousel.html" class="submenu-link">Carousel</a>
-
-            </li>
-
-            <li class="submenu-item  ">
-              <a href="component-collapse.html" class="submenu-link">Collapse</a>
-
-            </li>
-
-            <li class="submenu-item  ">
-              <a href="component-dropdown.html" class="submenu-link">Dropdown</a>
-
-            </li>
-
-            <li class="submenu-item  ">
-              <a href="component-list-group.html" class="submenu-link">List Group</a>
-
-            </li>
-
-            <li class="submenu-item  ">
-              <a href="component-modal.html" class="submenu-link">Modal</a>
-
-            </li>
-
-            <li class="submenu-item  ">
-              <a href="component-navs.html" class="submenu-link">Navs</a>
-
-            </li>
-
-            <li class="submenu-item  ">
-              <a href="component-pagination.html" class="submenu-link">Pagination</a>
-
-            </li>
-
-            <li class="submenu-item  ">
-              <a href="component-progress.html" class="submenu-link">Progress</a>
-
-            </li>
-
-            <li class="submenu-item  ">
-              <a href="component-spinner.html" class="submenu-link">Spinner</a>
-
-            </li>
-
-            <li class="submenu-item  ">
-              <a href="component-toasts.html" class="submenu-link">Toasts</a>
-
-            </li>
-
-            <li class="submenu-item  ">
-              <a href="component-tooltip.html" class="submenu-link">Tooltip</a>
-
-            </li>
-
-          </ul>
-
-
-        </li>
-
+          @for (menu of parent.childs; track menu.id; let menuIndex = $index) {
+            @if (menu.childs.length > 0) {
+              <li routerLinkActive="active" class="sidebar-item has-sub">
+                <a (click)="toggleSubmenu(parentIndex, menuIndex)"  class='sidebar-link'>
+                  <i [ngClass]="menu.icon"></i>
+                  <span>{{ menu.name }}</span>
+                </a>
+                <ul class="submenu" [ngClass]="menu.isOpen ? 'submenu-open' : 'submenu-close'">
+                  @for (submenu of menu.childs; track submenu.id) {
+                    <li class="submenu-item" routerLinkActive="active">
+                      <a routerLink="{{ menu.link + '/' + submenu.link }}" class="submenu-link">{{ submenu.name }}</a>
+                    </li>
+                  }
+                </ul>
+              </li>
+            } @else {
+              <li class="sidebar-item" routerLinkActive="active">
+                <a routerLink="{{ parent.link + '/' + menu.link }}" class='sidebar-link'>
+                  <i [ngClass]="menu.icon"></i>
+                  <span>{{ menu.name }}</span>
+                </a>
+              </li>
+            }
+          }
+        }
         <li class="sidebar-item">
-          <a routerLink="/login"  class='sidebar-link'>
+          <a style="cursor: pointer;" (click)="onLogout()" class='sidebar-link'>
             <i class="bi bi-person-fill-gear"></i>
             <span>Logout</span>
           </a>
