@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { ProductComponent } from './pages/product/product.component';
 import { MainComponent } from './shared/layout/main/main.component';
-import { TestComponent } from './pages/test/test.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { UserComponent } from './pages/user/user.component';
@@ -9,6 +8,8 @@ import { UserAddComponent } from './pages/user/user-add/user-add.component';
 import { UserEditComponent } from './pages/user/user-edit/user-edit.component';
 import { authGuard } from './core/guards/auth.guard';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 
 export const routes: Routes = [
   {
@@ -33,10 +34,6 @@ export const routes: Routes = [
             path: 'product',
             component: ProductComponent,
           },
-          {
-            path: 'test',
-            component: TestComponent,
-          },
         ],
       },
       {
@@ -51,8 +48,21 @@ export const routes: Routes = [
             component: UserAddComponent,
           },
           {
-            path: 'user/edit/:id',
-            component: UserEditComponent,
+            path: 'user/update/:id',
+            component: UserAddComponent,
+          },
+        ],
+      },
+      {
+        path: 'me',
+        children: [
+          {
+            path: 'profile',
+            component: ProfileComponent,
+          },
+          {
+            path: 'change-password',
+            component: ChangePasswordComponent,
           },
         ],
       },

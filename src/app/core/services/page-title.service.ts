@@ -8,7 +8,7 @@ export class PageTitleService {
   private sharedDataSubject = new BehaviorSubject<any>({}); // Ganti tipe data sesuai kebutuhan
   sharedData$ = this.sharedDataSubject.asObservable();
 
-  setSharedTitle(pageTitle: string, breadCrumb : Array<any>): void {
-    this.sharedDataSubject.next({pageTitle, breadCrumb});
+  setSharedTitle(pageTitle: string): void {
+    this.sharedDataSubject.next({pageTitle});
   }
 }

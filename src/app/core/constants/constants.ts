@@ -10,10 +10,14 @@ export const apiEndpoint = {
   AuthEndpoint: {
     login: `${apiurl}/auth/signin`,
     logout: `${apiurl}/auth/signout`,
+    refreshToken: `${apiurl}/auth/refresh-token`,
     // loggedUser: `${apiurl}/user`,
   },
   UserEndPoint : {
-    getAll : `${apiurl}/user`
+    get    : `${apiurl}/user`,
+    create : `${apiurl}/user`,
+    update : `${apiurl}/user`,
+    delete : `${apiurl}/user`,
   }
   // TodoEndpoint: {
   //   getAllTodo: `${apiurl}/todo`,

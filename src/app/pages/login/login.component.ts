@@ -48,10 +48,10 @@ export class LoginComponent implements OnDestroy {
         next: () => {
           // this.router.navigate(['admin/user'])
         },
-        // error: ({error} : HttpErrorResponse) => {
-        //   console.log('error ', error);
-        //   this.error = error.message;
-        // },
+        error: ({error} : HttpErrorResponse) => {
+          console.log('error ', error);
+          this.error = error.message;
+        },
       });
   }
 

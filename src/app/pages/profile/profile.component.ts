@@ -2,23 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { PageTitleService } from '../../core/services/page-title.service';
 
 @Component({
-  selector: 'app-product',
+  selector: 'app-profile',
   standalone: true,
   imports: [],
-  templateUrl: './product.component.html',
-  styleUrl: './product.component.css'
+  templateUrl: './profile.component.html',
+  styleUrl: './profile.component.css'
 })
-export class ProductComponent implements OnInit {
-  pageTitle = "Product"
-  users : Array<any> = []
-  isLoading : boolean = false
+export class ProfileComponent implements OnInit {
+
+  pageTitle = 'Profile'
 
   constructor(
     private shareTitle: PageTitleService,
   ) {}
 
   ngOnInit(): void {
-    console.log('users', this.users)
     this.sendDataToSidebar()
   }
 

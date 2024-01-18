@@ -54,7 +54,6 @@ export class SidebarComponent {
           icon : 'bi bi-stack',
           childs : [],
         },
-       
       ]
     },
     {

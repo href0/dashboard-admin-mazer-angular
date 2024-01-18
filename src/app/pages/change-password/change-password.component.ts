@@ -1,24 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { PageTitleService } from '../../core/services/page-title.service';
 
 @Component({
-  selector: 'app-product',
+  selector: 'app-change-password',
   standalone: true,
   imports: [],
-  templateUrl: './product.component.html',
-  styleUrl: './product.component.css'
+  templateUrl: './change-password.component.html',
+  styleUrl: './change-password.component.css'
 })
-export class ProductComponent implements OnInit {
-  pageTitle = "Product"
-  users : Array<any> = []
-  isLoading : boolean = false
+export class ChangePasswordComponent {
+  pageTitle = 'Change Password'
 
   constructor(
     private shareTitle: PageTitleService,
   ) {}
 
   ngOnInit(): void {
-    console.log('users', this.users)
     this.sendDataToSidebar()
   }
 

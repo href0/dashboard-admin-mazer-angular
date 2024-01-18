@@ -8,7 +8,7 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   tokenService.isAuthenticated.subscribe({
     next: (value) => {
-      console.log('route', route.url.join(""))
+      // console.log('route', route.url.join(""))
       const authRoute = route.url.join("")
       if(authRoute == 'login' || authRoute == 'register') {
         if (value) {
