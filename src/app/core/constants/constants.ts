@@ -1,4 +1,4 @@
-import { environment } from "../../../environments/environment.development";
+import { environment } from "../../../environments/environment";
 
 export const constants = {
   ACCESS_TOKEN : 'ACCESS_TOKEN',
