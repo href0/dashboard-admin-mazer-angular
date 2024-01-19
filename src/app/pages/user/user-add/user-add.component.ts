@@ -3,9 +3,10 @@ import { PageTitleService } from '../../../core/services/page-title.service';
 import { UserService } from '../../../core/services/user.service';
 import { Subscription, finalize } from 'rxjs';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { AlertComponent } from '../../../shared/components/alert/alert.component';
 import { ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-add',
@@ -29,6 +30,7 @@ export class UserAddComponent {
     private userService : UserService,
     private fb : FormBuilder,
     private route : ActivatedRoute,
+    private location : Location,
   ) {
     this.userForm = this.fb.group({
       email     : ['', [Validators.required, Validators.email]],
@@ -45,12 +47,18 @@ export class UserAddComponent {
       this.userId = param['id']
       if(this.userId) {
         this.userService.getById(this.userId).subscribe({
-          next: (result) =>{
-            this.userForm.get('email')?.setValue(result.data.email)
-            this.userForm.get('name')?.setValue(result.data.name)
-            this.userForm.get('phone')?.setValue(result.data.phone)
-            this.userForm.get('gender')?.setValue(result.data.gender)
-            this.userForm.get('birthDate')?.setValue(result.data.birthDate)
+          next: ({ data }) =>{
+            this.userForm.get('email')?.setValue(data.email)
+            this.userForm.get('name')?.setValue(data.name)
+            this.userForm.get('phone')?.setValue(data.phone)
+            this.userForm.get('gender')?.setValue(data.gender)
+            this.userForm.get('birthDate')?.setValue(data.birthDate)
+          },
+          error : (error : HttpErrorResponse) => {
+            if(error.status == 404) {
+              alert(error.error.message)
+              this.location.back()
+            }
           }
         })
       }

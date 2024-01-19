@@ -9,9 +9,28 @@
             <!-- <button routerLink="/admin/user/create" class="btn btn-info" style="margin-left: 10px;">Refresh</button> -->
           </div>
           <div class="row">
+            <div class="col-md-4">
+              <!-- <button  class="btn btn-outline-info dropdown-toggle rounded-pill" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-search"></i> {{ filter.search }} </button> -->
+              <ul class="dropdown-menu" >
+                  <li><a class="dropdown-item" (click)="selectedSearch(ISearch.NAME)">Name</a></li>
+                  <li><a class="dropdown-item" (click)="selectedSearch(ISearch.EMAIL)">Email</a></li>
+              </ul>
+              <div class="form-group position-relative has-icon-right mt-1">
+              
+                <input (keyup.enter)="getUsers(1)" type="text" [(ngModel)]="filter.searchValue" type="text" class="form-control rounded-pill"  placeholder="Find user here by {{ filter.search }}">
+                <div class="form-control-icon">
+                    <i class="bi bi-bookmarks"></i>
+                </div>
+              </div>
+                  <!-- <input (keyup.enter)="getUsers(1)" type="text" [(ngModel)]="filter.searchValue" class="form-control rounded-pill" placeholder="Find user here by {{ filter.search }}" aria-label="Text input with dropdown button"> -->
+                  <!-- <button  class="btn btn-primary" (click)="getUsers(1)">Search</button> -->
+      
+            </div>
+          </div>
+          <div class="row">
             
-            <div class="col-md-8">
-              <div class="mb-3 d-flex ">
+            <div class="col-md-4">
+              <div class="d-flex">
                 <p style="text-align: center; ;" class="d-flex align-items-center justify-content-center">Show &nbsp;</p>
                 <fieldset class="form-group" style="width: 80px;">
                   <select [(ngModel)]="filter.perPage" (change)="changePerPage($event)" class="form-select"
@@ -24,17 +43,8 @@
                 <p style="text-align: center; ;" class="d-flex align-items-center justify-content-center">&nbsp; entries</p>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="input-group mb-3">
-                  <button  class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-search"></i> {{ filter.search }} </button>
-                  <ul class="dropdown-menu" >
-                      <li><a class="dropdown-item" (click)="selectedSearch(ISearch.NAME)">Name</a></li>
-                      <li><a class="dropdown-item" (click)="selectedSearch(ISearch.EMAIL)">Email</a></li>
-                  </ul>
-                  <input (keyup.enter)="getUsers(1)" type="text" [(ngModel)]="filter.searchValue" class="form-control" placeholder="Find user here by {{ filter.search }}" aria-label="Text input with dropdown button">
-                  <!-- <button  class="btn btn-primary" (click)="getUsers(1)">Search</button> -->
-              </div>
-            </div>
+            <div class="col-md-4"></div>
+         
           </div>
         
        
