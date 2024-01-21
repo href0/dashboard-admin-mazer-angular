@@ -10,6 +10,7 @@ import { authGuard } from './core/guards/auth.guard';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
@@ -21,6 +22,16 @@ export const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
     canActivate : [authGuard]
+  },
+  {
+    path: '',
+    component: MainComponent,
+    children : [
+      {
+        path : 'dashboard',
+        component : DashboardComponent
+      }
+    ]
   },
   {
     path: '',

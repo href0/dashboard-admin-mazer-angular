@@ -94,10 +94,10 @@ export class UserAddComponent {
           message : 'User created successfully'
         }
       },
-      error : (error) => {
+      error : ({ error }) => {
         this.alert = {
           type : 'error',
-          message : error
+          message : error.message
         }
       }
     })
@@ -121,10 +121,11 @@ export class UserAddComponent {
         this.userForm.get('gender')?.setValue(data.gender)
         this.userForm.get('birthDate')?.setValue(data.birthDate)
       },
-      error : (error) => {
+      error : ({ error }) => {
+        console.log('error', error)
         this.alert = {
           type : 'error',
-          message : error
+          message : error.message
         }
       }
     })

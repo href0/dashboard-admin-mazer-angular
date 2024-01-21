@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
 import { HttpClientModule, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription, finalize } from 'rxjs';
 import { AuthService } from '../../core/services/auth.service';
+import { MenuService } from '../../core/services/menu.service';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +29,7 @@ export class LoginComponent implements OnDestroy {
   constructor(
     private _fb: FormBuilder,
     private authService: AuthService,
+    private menuService: MenuService,
   ) {
     this.loginForm = this._fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -46,6 +48,7 @@ export class LoginComponent implements OnDestroy {
       )
       .subscribe({
         next: () => {
+          this.getMenus()
           // this.router.navigate(['admin/user'])
         },
         error: ({error} : HttpErrorResponse) => {
@@ -57,5 +60,13 @@ export class LoginComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.loginSubscription?.unsubscribe();
+  }
+
+  getMenus() {
+    this.menuService.getAll().subscribe({
+      next: ({ data }) => {
+        this.menuService.setMenus(data)
+      }
+    })
   }
 }

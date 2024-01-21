@@ -39,11 +39,17 @@
     </div>
     <div class="sidebar-menu">
       <ul class="menu">
+        <li class="sidebar-item"  routerLinkActive="active">
+          <a routerLink="/dashboard" style="cursor: pointer;" class='sidebar-link'>
+            <i class="bi bi-backpack-fill"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
         @for ( parent of sidebars; track parent.id; let parentIndex = $index) {
           <li class="sidebar-title"> {{ parent.name }}</li>
 
           @for (menu of parent.childs; track menu.id; let menuIndex = $index) {
-            @if (menu.childs.length > 0) {
+            @if (menu.childs && menu.childs.length > 0) {
               <li routerLinkActive="active" class="sidebar-item has-sub">
                 <a (click)="toggleSubmenu(parentIndex, menuIndex)"  class='sidebar-link'>
                   <i [ngClass]="menu.icon"></i>
@@ -52,14 +58,14 @@
                 <ul class="submenu" [ngClass]="menu.isOpen ? 'submenu-open' : 'submenu-close'">
                   @for (submenu of menu.childs; track submenu.id) {
                     <li class="submenu-item" routerLinkActive="active">
-                      <a routerLink="{{ menu.link + '/' + submenu.link }}" class="submenu-link">{{ submenu.name }}</a>
+                      <a routerLink="{{ menu.url + '/' + submenu.url }}" class="submenu-link">{{ submenu.name }}</a>
                     </li>
                   }
                 </ul>
               </li>
             } @else {
               <li class="sidebar-item" routerLinkActive="active">
-                <a routerLink="{{ parent.link + '/' + menu.link }}" class='sidebar-link'>
+                <a routerLink="{{ parent.url + '/' + menu.url }}" class='sidebar-link'>
                   <i [ngClass]="menu.icon"></i>
                   <span>{{ menu.name }}</span>
                 </a>

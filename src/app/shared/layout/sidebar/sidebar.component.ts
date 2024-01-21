@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MenuService } from '../../../core/services/menu.service';
 
 interface Menu {
   id      : number
   name    : string
-  link    : string
+  url     : string
   icon?   : string
   isOpen? : Boolean
   childs? : any
@@ -21,69 +22,78 @@ interface Menu {
   encapsulation: ViewEncapsulation.None
 })
 
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   isOpen = true
 
-  sidebars : Array<Menu> = [
-    {
-      id : 1,
-      name : "Admin",
-      link : 'admin',
-      icon : 'bi bi-stack',
-      childs : [
-        {
-          id     : 1,
-          name   : "User",
-          link   : 'user',
-          icon   : 'bi bi-stack',
-          isOpen : false,
-          childs : []
-        }
-      ]
-    },
-    {
-      id : 2,
-      name : 'Data',
-      link : 'data',
-      childs : [
-        {
-          id : 1,
-          name : "Product",
-          link : 'product',
-          isOpen : false,
-          icon : 'bi bi-stack',
-          childs : [],
-        },
-      ]
-    },
-    {
-      id : 3,
-      name : "Me",
-      link : 'me',
-      childs : [
-        {
-          id : 1,
-          name : "Profile",
-          link : 'profile',
-          icon : 'bi bi-stack',
-          isOpen : false,
-          childs : []
-        },
-        {
-          id : 2,
-          name : "Change Password",
-          link : 'change-password',
-          icon : 'bi bi-stack',
-          isOpen : false,
-          childs : []
-        }
-      ]
-    }
-  ]
-
+  // sidebars : Array<Menu> = [
+  //   {
+  //     id : 1,
+  //     name : "Admin",
+  //     url : 'admin',
+  //     icon : 'bi bi-stack',
+  //     childs : [
+  //       {
+  //         id     : 1,
+  //         name   : "User",
+  //         url   : 'user',
+  //         icon   : 'bi bi-stack',
+  //         isOpen : false,
+  //         childs : []
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     id : 2,
+  //     name : 'Data',
+  //     url : 'data',
+  //     childs : [
+  //       {
+  //         id : 1,
+  //         name : "Product",
+  //         url : 'product',
+  //         isOpen : false,
+  //         icon : 'bi bi-stack',
+  //         childs : [],
+  //       },
+  //     ]
+  //   },
+  //   {
+  //     id : 3,
+  //     name : "Me",
+  //     url : 'me',
+  //     childs : [
+  //       {
+  //         id : 1,
+  //         name : "Profile",
+  //         url : 'profile',
+  //         icon : 'bi bi-stack',
+  //         isOpen : false,
+  //         childs : []
+  //       },
+  //       {
+  //         id : 2,
+  //         name : "Change Password",
+  //         url : 'change-password',
+  //         icon : 'bi bi-stack',
+  //         isOpen : false,
+  //         childs : []
+  //       }
+  //     ]
+  //   }
+  // ]
+  sidebars! : Array<Menu>
   constructor(
-    private authService : AuthService
-  ){}
+    private authService : AuthService,
+    private menuService : MenuService,
+  ){
+  }
+
+  ngOnInit(): void {
+    this.menuService.menu$.subscribe(menuData => {
+      this.sidebars = menuData;
+    });
+    
+  }
 
   toggleSubmenu(parentIndex : number, menuIndex : number) {
     console.log('togle')

@@ -18,7 +18,13 @@ export const apiEndpoint = {
     create : `${apiurl}/user`,
     update : `${apiurl}/user`,
     delete : `${apiurl}/user`,
-  }
+  },
+  MenuEndPoint : {
+    get    : `${apiurl}/menu`,
+    create : `${apiurl}/menu`,
+    update : `${apiurl}/menu`,
+    delete : `${apiurl}/menu`,
+  },
   // TodoEndpoint: {
   //   getAllTodo: `${apiurl}/todo`,
   //   addTodo: `${apiurl}/todo`,
