@@ -1,3 +1,3 @@
 export const environment = {
-  API_URL : 'https://2124-103-171-163-208.ngrok-free.app'
+  API_URL : 'https://auth-jwt-prisma-express.vercel.app'
 };
