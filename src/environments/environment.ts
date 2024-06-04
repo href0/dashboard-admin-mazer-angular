@@ -1,3 +1,3 @@
 export const environment = {
-  API_URL : 'https://auth-jwt-prisma-express.vercel.app'
+  API_URL : 'http://193.168.195.15:3000'
 };
